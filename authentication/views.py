@@ -41,15 +41,18 @@ def SignupView(request):
 def LoginView(request):
     if request.method=='POST':
         email=request.POST['email']
-        password=request.POST['pass']
+        password=request.POST['password']
         username=str(email).split('@')[0]
 
-        if checks.user_is_valid(username,password):
+        if checks.user_is_valid(email):
             user=authenticate(request,username=username,password=password)
-            login(request,user)
-            return redirect('index')
+            if user:
+                login(request,user)
+                return redirect('index')
+            else:
+                messages.info(request,"Please Enter Correct Answer")
         else:
-            messages.info(request,"Please Enter Correct Credentials")
+            messages.info(request,"User Does not Exist")
             return redirect('auth_view')
         
 

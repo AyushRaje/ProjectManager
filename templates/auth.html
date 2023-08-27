@@ -57,15 +57,15 @@ ManageIT
           <br>
           <form method="post" action="{% url 'login' %}" name="loginform">
             {% csrf_token %}
-            <h5 class="card-text"><strong>Username</strong></h5>
+            <h5 class="card-text"><strong>Email</strong></h5>
             <p class="card-text">
-              <input type="email" class="form-control" id="exampleFormControlInput1"
+              <input type="email" name="email" class="form-control" id="exampleFormControlInput1"
                 placeholder="e.g.-manageit@gmail.com" style="text-align: center;">
             </p>
             <br>
             <h5 class="card-text"><strong>Password</strong></h5>
             <p class="card-text">
-              <input type="password" id="inputPassword5" class="form-control" placeholder="Must be 8-20 characters long"
+              <input type="password" name="password" id="inputPassword5" class="form-control" placeholder="Must be 8-20 characters long"
                 style="text-align: center;">
             </p>
             <br>

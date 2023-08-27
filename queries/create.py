@@ -1,7 +1,7 @@
 from authentication import models
 from django.db import connection
 from datetime import datetime
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password,check_password
 def create_user(username,email,password):
     with connection.cursor() as cursor:
         try:
