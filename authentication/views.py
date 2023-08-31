@@ -48,12 +48,15 @@ def LoginView(request):
             user=authenticate(request,username=username,password=password)
             if user:
                 login(request,user)
-                return redirect('index')
+                return redirect('home')
             else:
-                messages.info(request,"Please Enter Correct Answer")
+                messages.info(request,"Please Enter Correct Password")
+                return redirect('auth_view')
         else:
             messages.info(request,"User Does not Exist")
             return redirect('auth_view')
-        
 
+def LogoutView(request):
+    logout(request)        
+    return redirect('auth_view')
                        

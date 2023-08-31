@@ -16,18 +16,33 @@ ManageIT
 </nav>
 
 
+
+
 <div class="container align-items-center">
-  {% for message in messages %}
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {% if messages %}
+    
+  <div class="alert alert-warning alert-dismissible fade show js-alert" role="alert" style="z-index: -1;">
+    {% for message in messages %}
     <strong>{{message}}</strong>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {% endfor %}
   </div>
-{% endfor %}
-  <div class="card mb-3" style="max-width: 540px; margin-left: auto; margin-right: auto; margin-top: 100px;
+
+  {% endif %}
+  
+  <script>
+    setTimeout(function() {
+        bootstrap.Alert.getOrCreateInstance(document.querySelector(".alert")).close();
+    }, 2000)
+
+    
+  </script>
+  
+  <div class="card mb-3" style="max-width: 540px; margin-left: auto; margin-right: auto; margin-top: 100px; border-radius: 20px;
         background: rgba(255, 255, 255, 0.801); transition: all 1s ease-in-out;" id="logindiv">
 
     <div class="row g-0">
-      <div class="col-md-5 card" style="text-align: center; background: rgba(0,0,0,1); color: white;">
+      <div class="col-md-5 card" style="text-align: center; background: rgba(0,0,0,1); color: white; border-radius: 20px;">
         <div class="card-body align-items-center">
           <br>
 
@@ -55,7 +70,7 @@ ManageIT
           <h4 class="card-title"><strong>Login</strong></h4>
           <p class="card-text"><i>"Tune into your project"</i></p>
           <br>
-          <form method="post" action="{% url 'login' %}" name="loginform">
+          <form method="post" action="{% url 'login_view' %}" name="loginform">
             {% csrf_token %}
             <h5 class="card-text"><strong>Email</strong></h5>
             <p class="card-text">
@@ -79,7 +94,7 @@ ManageIT
     </div>
   </div>
 
-  <div class="card mb-3" style="max-width: 540px; margin-left: auto; margin-right: auto; margin-top: -410px;
+  <div class="card mb-3" style="max-width: 540px; margin-left: auto; margin-right: auto; margin-top: -410px; border-radius: 20px;
         background: rgba(255, 255, 255, 0.801); transform: rotateY(90deg); transition: all 1s ease-in-out;"
     id="signupdiv">
 
@@ -89,7 +104,7 @@ ManageIT
           <h4 class="card-title"><strong>Signup</strong></h4>
           <p class="card-text"><i>"New User? Signup for free"</i></p>
           <br>
-          <form method="post" action="{% url 'signup' %}" name="signupform">
+          <form method="post" action="{% url 'signup_view' %}" name="signupform">
             {% csrf_token %}
             <h5 class="card-text"><strong>Email</strong></h5>
             <p class="card-text">
@@ -121,7 +136,7 @@ ManageIT
 
 
       </div>
-      <div class="col-md-5 card" style="text-align: center; background: rgba(0,0,0,1); color: white;">
+      <div class="col-md-5 card" style="text-align: center; background: rgba(0,0,0,1); color: white; border-radius: 20px;">
         <div class="card-body align-items-center">
           <br>
           
