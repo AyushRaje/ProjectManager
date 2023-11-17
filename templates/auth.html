@@ -1,201 +1,79 @@
 {% extends "base.html" %}
 
 {% block title %}
-ManageIT
+Login
 {% endblock title %}
 
-{% block content %}
-<nav class="navbar" style="background-color: black;">
-  <div class="container">
-    <a class="navbar-brand" href="#" style="margin-left: 45%;">
-      <img
-        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAeFBMVEUAAAD///+qqqrQ0NBpaWlPT0/f39/29vYiIiL5+fnFxcWAgICxsbHe3t66uroXFxdzc3Pn5+eHh4eUlJRGRkbBwcHv7+/V1dVaWlpjY2NAQEAbGxtLS0swMDCsrKw6Ojqenp4zMzOQkJCbm5tvb28mJiYNDQ17e3sjWg1iAAAEPklEQVR4nO3d7VbiMBAGYCsiKyCIQEFRQVC8/ztc1t09287ko5OWScK+z+8cz7ynTUvbSby6AgAAAAAAAAAAAAAAAAAAAAAAAID/1uZHVexqunX8Gq8GBXE3G877sSvrxuM9DVeJOck+5HRsj/fb7CF2ja1c+/J9Z1zHLjPYmk0+i0nsSgPtGuY7Kd9jFxui1zzgyVPscuUcV1Cj7C440oBFcRO7ZJmhOGBRPMcuWmIfELAYxK5a4DkkYFEMY9fd3CwsYfERu/CmHgMD5nOeNv0pw+1jl96M7RAOKu6yPoilofTysKgP2nwYbyhZ3PdfDIWPTAM3ht91K+1qQ7zxAzi1DDXcNlVLDcRuFaV9LJ+yGZymU1b0q2P0kg4eqxUa7IbWfO0cTkffKpXZwlw2s9is1amyDfrqqecevqAJ03+TSm9zB894eu/fqlTZBr3J+S6O9NKb/gtUmtD36E5fBlxewlskTA4SUkiYHiSkkDA9SEghYXqQkELC9CAhhYTpQUIKCdODhNTlv03M/42wJ+GWDC8+dcpsQZiQNTDqVNmGMCE9SWc6VbYhS8gOYQbNtKKEfRrQ3NOQFklC9vEwh2koSTjiAe/1Cg1GE1rbm59MTbaPmqWeTPuj+eFahv5GWRpHjXvmvi/VeA8TU/vWebn7NjrVZ40uKtTyvcj70DuhNgtD2tC7oNUtxJqa1LjawzrUaDHWWSg17cU6Q4tipxNQtlipS286AePcI35RuhMeogVUeqRYx8pXLvzFdSJ8nUQ7an3B3kXJ59FTWz/6GSXfRPHtof51tJyoLuXaGIsYDMfC58NmDvNR/6gZ78q88rqX70p5A8Pjbobrqx3Y2/ViYFvLkym2TCKDZQEy7JniK3ZFXaPTMIPvB0L0EGq/uDy7V5rwwi4z/AtCJgtyBehHIN80pK+r/q3fkn7l1kIT+l7sISES6kNCCgmRUB8SUkiIhPqQkEJCJNSHhBQSIqG+7hLSV8uprJ/oLiH9PHDeupujCX29uvaE5DtkMjt20o3yHHusfaMNzJXdoOptY0q9an7vpGLfyUW736qLCKqtm+l83znShJ5LIF1xVuvZWjb9K6poL417/rDvqfUPOevvC2q5O2O9citas3MCsa+N7J6wSWYC/sXaSl1X0yc6OJl7ggPvabP3YrFPcVksBGGfSO0RDXtZz1VLDTThdd8aO7JMLZpZdDXwZWQnvS9S+8vOtNYli71x+S3uj7vqFs7mIbm0FoWvQsimb8NyEP2y6X4L3O8/nccHv8DFJLHLlgg6T1P6de11tGx377KLXbSMfCpmsLq8zrC62mkZu2C5rehEzWAHdQPB5SaD7QGMmv43sVn6G63YbNkDv0kWT0xWxt0AahTXlZ/J89ixzmuV6wQkFvvhjF1ZB6u3DP7JhkjtP8BeXG80AAAAAAAAAAAAAAAAAAAAAAAAADT3Ez05Mth/20AwAAAAAElFTkSuQmCC"
-        alt="Bootstrap" width="50" height="50">
-    </a>
-  </div>
+{% block body %}
+<nav style="background-color: rgb(71, 16, 182);">
+    <div class="nav-wrapper">
+        <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>ManageIT</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="sass.html"><i class="material-icons">home</i></a></li>
+            <li><a href="badges.html"><i class="material-icons">info</i></a></li>
+            <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+        </ul>
+    </div>
 </nav>
+<div class="container center">
+    <div class="row">
 
+        <div class="col s6 offset-s3">
+            <h4 class="header" style="font-weight: bolder;">Signup to Continue</h4>
+            <div class="card horizontal" style="border-radius: 10px; box-shadow: 20px;">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <div class="row">
+                            <img src="https://user-images.githubusercontent.com/194400/71252943-4a413580-231e-11ea-8fa9-75a773114075.png"
+                            alt="" style="height: 100px; width: 220px;">
+                        </div>
+                        <!-- <div class="row"> -->
+                            
+                            <form class="col s12" method="POST" action="">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <i class="material-icons prefix">account_circle</i>
+                                        <input id="username" name="username" type="text" class="validate" style="text-align: center; font-weight: bolder;" required>
+                                        <label for="password" style=" font-weight: bolder;">Username</label>
+                                    </div>
+                                </div>
+                               
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <i class="material-icons prefix">lock</i>
+                                       <input id="password" name="password" type="password" class="validate" style="text-align: center; font-weight: bolder;" required>
+                                        <label for="password" style=" font-weight: bolder;">Password</label>
+                                    </div>
+                                </div>
+                                <div class="row">
 
+                                    <p>
+                                        <label>
+                                            <input type="checkbox" class="filled-in" checked="checked" />
+                                            <span>Remember me</span>
+                                        </label>
+                                    </p>
+                                </div>
 
+                                <div class="row">
+                                    <button class="btn waves-effect waves-light" type="submit" name="action" style="border-radius: 15px; background-color: green;"><strong>Login</strong>
+                                        <i class="material-icons right">verified_user</i>
+                                    </button>
+                                </div>
+                            </form>
 
-<div class="container align-items-center">
-  {% if messages %}
-    
-  <div class="alert alert-warning alert-dismissible fade show js-alert" role="alert" style="z-index: -1;">
-    {% for message in messages %}
-    <strong>{{message}}</strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    {% endfor %}
-  </div>
+                                <div class="row">
+                                    <a href="signup.html"><u>New user? Click to register</u></a>
+                                </div>
+                            <!-- </div> -->
+                        </div>
+                        
+                </div>
 
-  {% endif %}
-  
-  <script>
-    setTimeout(function() {
-        bootstrap.Alert.getOrCreateInstance(document.querySelector(".alert")).close();
-    }, 2000)
-
-    
-  </script>
-  
-  <div class="card mb-3" style="max-width: 540px; margin-left: auto; margin-right: auto; margin-top: 100px; border-radius: 20px;
-        background: rgba(255, 255, 255, 0.801); transition: all 1s ease-in-out;" id="logindiv">
-
-    <div class="row g-0">
-      <div class="col-md-5 card" style="text-align: center; background: rgba(0,0,0,1); color: white; border-radius: 20px;">
-        <div class="card-body align-items-center">
-          <br>
-
-          <h4 class="card-title" style="margin-top: auto;">
-            <strong>New Here</strong>
-          </h4>
-          <p class="card-text">
-            <i>
-              "New to Manageit?"
-            </i>
-          </p>
-          <br>
-          <p class="card-text">
-            Signup to start your own project
-          </p>
-          <br>
-          <p class="card-text">
-            <button type="button" class="btn btn-outline-warning" name="signuptransition"
-              onclick="rotatesignupdiv()">Signup</button>
-          </p>
+            </div>
         </div>
-      </div>
-      <div class="col-md-7">
-        <div class="card-body" style="text-align: center;">
-          <h4 class="card-title"><strong>Login</strong></h4>
-          <p class="card-text"><i>"Tune into your project"</i></p>
-          <br>
-          <form method="post" action="{% url 'login_view' %}" name="loginform">
-            {% csrf_token %}
-            <h5 class="card-text"><strong>Email</strong></h5>
-            <p class="card-text">
-              <input type="email" name="email" class="form-control" id="exampleFormControlInput1"
-                placeholder="e.g.-manageit@gmail.com" style="text-align: center;">
-            </p>
-            <br>
-            <h5 class="card-text"><strong>Password</strong></h5>
-            <p class="card-text">
-              <input type="password" name="password" id="inputPassword5" class="form-control" placeholder="Must be 8-20 characters long"
-                style="text-align: center;">
-            </p>
-            <br>
-            <p class="card-text">
-              <button type="submit" class="btn btn-outline-success" name="loginbutton" onclick="loginform">Login</button>
-            </p>
-
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
-
-  <div class="card mb-3" style="max-width: 540px; margin-left: auto; margin-right: auto; margin-top: -410px; border-radius: 20px;
-        background: rgba(255, 255, 255, 0.801); transform: rotateY(90deg); transition: all 1s ease-in-out; z-index: -5;"
-    id="signupdiv">
-
-    <div class="row g-0">
-      <div class="col-md-7">
-        <div class="card-body" style="text-align: center;">
-          <h4 class="card-title"><strong>Signup</strong></h4>
-          <p class="card-text"><i>"New User? Signup for free"</i></p>
-          <br>
-          <form method="post" action="{% url 'signup_view' %}" name="signupform">
-            {% csrf_token %}
-            <h5 class="card-text"><strong>Email</strong></h5>
-            <p class="card-text">
-              <input type="email" name="email" class="form-control" id="exampleFormControlInput1"
-                placeholder="e.g.-manageit@gmail.com" style="text-align: center;">
-            </p>
-            <br>
-          
-            <h5 class="card-text"><strong>Password</strong></h5>
-            <p class="card-text">
-              <input type="password" name="pass" id="inputPassword5" class="form-control"
-                placeholder="Must be 8-20 characters long" style="text-align: center;">
-            </p>
-            <br>
-
-            <h5 class="card-text"><strong>Confirm Password</strong></h5>
-            <p class="card-text">
-              <input type="password" name="cnfpass" id="inputPassword5" class="form-control"
-                style="text-align: center;">
-            </p>
-            <br>
-            <p class="card-text">
-              <button type="submit" class="btn btn-outline-success" name="signupbutton">Signup</button>
-            </p>
-
-          </form>
-        </div>
-
-
-
-      </div>
-      <div class="col-md-5 card" style="text-align: center; background: rgba(0,0,0,1); color: white; border-radius: 20px;">
-        <div class="card-body align-items-center">
-          <br>
-          
-          <h4 class="card-title" style="margin-top: auto;">
-            <strong>Welcome Back</strong>
-          </h4>
-          <p class="card-text">
-            <i>
-              "Already a User?"
-            </i>
-          </p>
-          <br>
-          <p class="card-text">
-            Login to tune back into your projects
-          </p>
-          <br>
-          <p class="card-text">
-            <button type="button" class="btn btn-outline-warning" name="signuptransition"
-              onclick="rotatelogindiv()">Login</button>
-          </p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
 </div>
 
-<script>
-  function rotatesignupdiv() {
-    document.getElementById("logindiv").style.transform
-      = 'rotateY(90deg)';
-      document.getElementById("logindiv").style.zIndex
-      = '-1';  
-    document.getElementById("signupdiv").style.transform
-      = 'rotateY(0)';
-    document.getElementById("signupdiv").style.zIndex
-      = '1';
-  }
-
-  function rotatelogindiv() {
-    document.getElementById("logindiv").style.transform
-      = 'rotateY(0deg)';
-    document.getElementById("logindiv").style.zIndex
-      = '1';
-    document.getElementById("signupdiv").style.transform
-      = 'rotateY(-90deg)';
-    document.getElementById("signupdiv").style.zIndex
-      = '-1';  
-  }
-
-  function loginform(){
-    var form=document.getElementsByName('loginform')
-    form.submit()
-  }
-  function signupform(){
-    var form=document.getElementsByName('signupform')
-    form.submit()
-  }
-</script>
-
-{% endblock content %}
+{% endblock body %}
