@@ -5,7 +5,7 @@ from django.dispatch import receiver
 # Create your models here.
 class Project(models.Model):
     project_id = models.CharField(max_length=10,unique=True)
-    created_by = models.ForeignKey(User,on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User,on_delete=models.CASCADE,related_name='project_owner')
     
     title = models.CharField(max_length=256,null=True,blank=True)
     description= models.CharField(max_length=2048,null=True,blank=True)
