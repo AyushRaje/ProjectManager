@@ -12,17 +12,14 @@ class Project(models.Model):
     additional_details = models.CharField(max_length=2048,null=True,blank=True)
     git_link = models.CharField(max_length=256,null=True,blank=True)
     
+    members = models.ManyToManyField(User,related_name='members')
+    
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
-class Members(models.Model):
-    project = models.ForeignKey(Project,on_delete=models.CASCADE)
-    members = models.ManyToManyField(User)
-    
-    def __str__(self):
-        return self.project.title
+
     
 class Task(models.Model):
     project = models.ForeignKey(Project,on_delete=models.CASCADE)

@@ -7,7 +7,6 @@ admin.site.register([
     models.Conversation,
     models.Comment,
     models.Issue,
-    models.Members,
     models.Task,
     models.Chat
 ])
