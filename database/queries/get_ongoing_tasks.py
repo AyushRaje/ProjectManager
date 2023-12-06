@@ -22,7 +22,8 @@ def get_all_ongoing_tasks(user_id):
                     'title':task[1],
                     'description':task[2],
                     'priority':task[3],
-                    'created_at':task[4],   
+                    'created_at':task[4], 
+                    'scheduled_at':task[5]  
                 }
                 result.append(task_dict)
         except Exception as e:

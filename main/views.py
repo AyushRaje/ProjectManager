@@ -7,6 +7,8 @@ from django.views.decorators.cache import cache_control
 
 from database.saves.create_project import save_project
 from database.saves.create_member import join_project
+from database.saves.create_task import save_task
+from database.saves.create_issue import save_issue
 
 from database.queries.get_projects_for_user import get_projects
 from database.queries.get_ongoing_tasks import get_all_ongoing_tasks
@@ -38,7 +40,7 @@ def index(request):
     all_expired = get_all_expired(user_id=user_id)
     unique_id=id_generate()
     UNIQUE_ID=unique_id
-    get_available_members(user_id=user_id)
+    all_members=get_available_members(user_id=user_id)
     context={
         'projects':projects,
         'ongoing_tasks':ongoing_tasks,
@@ -46,7 +48,8 @@ def index(request):
         'open_issues':open_issues,
         'closed_issues':closed_issues,
         'all_expired':all_expired,
-        'unique_id':unique_id
+        'unique_id':unique_id,
+        'all_members':all_members
     }
     
     # print(completed_tasks)
@@ -81,4 +84,22 @@ def join_pro(request):
     if request.method=='POST':
         join_project(user_id=user_id,project_id=request.POST['join_project_id'])
         return redirect('index')          
+    return redirect('index')
+
+def create_task(request):
+    user_id = request.user.id
+    form_data = request.POST
+    save_task(user_id=user_id,description=form_data['description'],
+              assigned_to=form_data['members'],priority=form_data['priority'],
+              project_id=form_data['project'],schedule_date=form_data['schedule_date'],schedule_time=form_data['schedule_time'],
+              task_name=form_data['name'])
+    return redirect('index')
+
+def create_issue(request):
+    user_id = request.user.id
+    form_data = request.POST
+    save_issue(user_id=user_id,description=form_data['description'],
+              assigned_to=form_data['members'],priority=form_data['priority'],
+              project_id=form_data['project'],
+              issue_name=form_data['name'])
     return redirect('index')

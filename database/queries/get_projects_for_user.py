@@ -27,6 +27,7 @@ def get_projects(user_id):
                     'project_id':p[1],
                     'title':p[2],
                     'description':p[3][0:30],
+                    'full_description':p[3],
                     'created_at':p[6]
                 }
                 projects.append(project_dict)
@@ -47,5 +48,6 @@ def get_projects(user_id):
         
         finally:
             cursor.close()
+            
                 
         return projects 

@@ -57,7 +57,11 @@
 			
 			<div class="ml-10">
 				<a class="mx-2 text-sm font-semibold text-white hover:text-pink-700" href="#">Dashboard</a>
-				<a class="mx-2 text-sm font-semibold text-white hover:text-pink-700" href="#">Chat</a>
+				<a class="mx-2 text-sm font-semibold text-white hover:text-pink-700" href="{% url 'logout' %}">
+				Signout
+				</a>
+				
+				
 				<a class="mx-2 text-sm font-semibold text-white hover:text-pink-700 modal-trigger" href="#join-modal">Join Project</a>
 			</div>
 			<div id="join-modal" class="modal center">
@@ -76,11 +80,11 @@
 							
 							<button class="btn waves-effect waves-light center" id="submit_button" type="submit"
 							name="action" style="border-radius: 15px;" ><strong>Join</strong>
-							<i class="material-icons right">send</i>
+							<i class="material-icons right">cancel</i>
 						</button>
 						<button class="btn waves-effect waves-light center modal-close" type="button"
 						name="close" style="border-radius: 15px; background-color: red;"><strong>Close</strong>
-						<i class="material-icons right">send</i>
+						<i class="material-icons right">check</i>
 					</button>
 					
 				</div>
@@ -167,7 +171,7 @@
 										</div>
 										<div class="input-field col s6">
 											<i class="material-icons prefix">border_color</i>
-											<input id="icon_telephone" type="email" class="validate" name="dep_link">
+											<input id="icon_telephone" type="url" class="validate" name="dep_link">
 											<label for="icon_telephone">Deployment Link(if any)</label>
 										</div>
 									</div>
@@ -212,7 +216,40 @@
 
 				</div>
 				<div class="flex flex-col pb-2 overflow-auto">
+					
 					{% for project in projects %}
+					<div id="modal-{{project.id}}" class="modal">
+						<div class="modal-content">
+							<div class="row center">
+								<div class="row center">
+
+								
+								<div class="input-field col s12">
+								<h4>{{project.title}}</h4>	
+								</div>
+								</div>
+								
+								<div class="input-field col s12">
+									<p style="font-weight: bolder; font-size: large;">Project ID</p>
+									<p style="color: red;">{{project.project_id}}</p>	
+								</div>
+
+								<div class="input-field col s12">
+									<p style="font-weight: bolder; font-size: large;">Description</p>
+									<p>{{project.full_description}}</p>	
+								</div>
+
+								<div class="input-field col s12">
+									<p style="font-weight: bolder; font-size: large;">Created_by</p>
+									<p>{{project.full_description}}</p>	
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+						  <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+						</div>
+					</div>
+					<a class="modal-trigger" style="color: black;" href="#modal-{{project.id}}">
 					<div class="relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100"
 						draggable="true">
 						<button
@@ -224,10 +261,10 @@
 							</svg>
 						</button>
 						<span
-							class="flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full">Design</span>
-						<h4 class="mt-3 text-sm font-medium">
-							<p><strong>Title: </strong> {{project.title}}</p>
-							<p><strong>Description: </strong> {{project.description}}...</p>
+							class="flex items-center h-6 px-3 text-xs font-semibold text-red-500 bg-red-100 rounded-full">Unique ID: {{project.project_id}}</span>
+						<h4 class="mt-3 text-sm font-bold">
+							<p>Title: {{project.title}}</p>
+							<p>Description: {{project.description}}...</p>
 						</h4>
 						<div class="flex items-center w-full mt-3 text-xs font-medium text-gray-400">
 							<div class="flex items-center">
@@ -239,29 +276,9 @@
 								</svg>
 								<span class="ml-1 leading-none" style="color: black;">{{project.created_at}}</span>
 							</div>
-							<div class="relative flex items-center ml-4">
-								<svg class="relative w-4 h-4 text-gray-300 fill-current"
-									xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-									<path fill-rule="evenodd"
-										d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-										clip-rule="evenodd" />
-								</svg>
-								<span class="ml-1 leading-none" style="color: black;">4</span>
-							</div>
-							<div class="flex items-center ml-4">
-								<svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 20 20" fill="currentColor">
-									<path fill-rule="evenodd"
-										d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-										clip-rule="evenodd" />
-								</svg>
-								<span class="ml-1 leading-none" style="color: black;">1</span>
-							</div>
-							<img class="w-6 h-6 ml-auto rounded-full"
-								src='https://randomuser.me/api/portraits/women/26.jpg' />
 						</div>
 					</div>
-
+					</a>
 					{% endfor %}
 
 
@@ -284,7 +301,7 @@
 					</button>
 					<div id="modal-ongoingtask" class="modal modal-fixed-footer">
 						<div class="modal-content center">
-							<form class="col s12" action="{% url 'create_project' %}" method="post">
+							<form class="col s12" action="{% url 'create_task' %}" method="post">
 								{% csrf_token %}
 								<h4>Add Task</h4>
 								<script>
@@ -299,16 +316,16 @@
 										
 										<div class="input-field col s6">
 											<i class="material-icons prefix">border_color</i>
-											<input id="icon_telephone" type="text" class="validate" name="description"
+											<input id="icon_telephone" type="text" class="validate" name="name"
 												required>
 											<label for="icon_telephone">Task Name</label>
 										</div>
 										<div class="input-field col s6">
-											<select required>
+											<select name="project" required>
 									
 											  <option value="" disabled selected>Choose Project</option>
 											  {% for project in projects %}
-											  <option value={{project.id}}>{{project.title}}</option>
+											  <option value="{{project.id}}">{{project.title}}</option>
 											  
 											  {% endfor %}
 											</select>
@@ -319,16 +336,16 @@
 									<div class="row">
 										<div class="input-field col s6">
 											<i class="material-icons prefix">book</i>
-											<input id="icon_prefix" type="text" class="validate" name="domain" required>
+											<input id="icon_prefix" type="text" class="validate" name="description" required>
 											<label for="icon_prefix">Description</label>
 										</div>
 										<div class="input-field col s6">
-											<select required>
+											<select name="members" required>
 									
 											  <option value="" disabled selected>Assign to</option>
-											  <option value="1">Option 1</option>
-											  <option value="2">Option 2</option>
-											  <option value="3">Option 3</option>
+											  {% for member in all_members %}
+											  <option value="{{member.id}}">{{member.name}}</option>
+											  {% endfor %}
 											</select>
 											<label>Choose Member</label>
 										  </div>
@@ -338,16 +355,33 @@
 									<div class="row">
 										<div class="input-field col s6">
 											<i class="material-icons prefix">book</i>
-											<input id="icon_prefix" type="date" class="validate" name="git_link"
+											<input id="icon_prefix" type="date" class="validate" name="schedule_date"
 												required>
 											<label for="icon_prefix">Schedule to</label>
 										</div>
 										<div class="input-field col s6">
 											<i class="material-icons prefix">book</i>
-											<input id="icon_prefix" type="time" class="validate" name="git_link"
+											<input id="icon_prefix" type="time" class="validate" name="schedule_time"
 												required>
 				
 										</div>
+										
+									</div>
+									<div class="row">
+										<div class="input-field col s6">
+											<select name="priority" required>
+									
+												<option value="" disabled selected>Choose Priority</option>
+												
+												<option value="high">High</option>
+												<option value="medium">Medium</option>
+												<option value="low">Low</option>
+												
+												
+											  </select>
+											  <label>Select Priority</label>
+										</div>
+										
 										
 									</div>
 
@@ -358,12 +392,12 @@
 							<div class="row center center-align">
 
 								<button class="btn waves-effect waves-light center" id="submit_button" type="submit"
-									name="action" style="border-radius: 15px;" value="{{unique_id}}">Add Project
-									<i class="material-icons right">send</i>
+									name="action" style="border-radius: 15px;" value="{{unique_id}}">Add Task
+									<i class="material-icons right">check</i>
 								</button>
 								<button class="btn waves-effect waves-light center modal-close" type="button"
 									name="close" style="border-radius: 15px; background-color: red;">Close
-									<i class="material-icons right">send</i>
+									<i class="material-icons right">cancel</i>
 								</button>
 
 							</div>
@@ -375,6 +409,9 @@
 				</div>
 				<div class="flex flex-col pb-2 overflow-auto">
 					{% for task in ongoing_tasks %}
+					
+
+
 					<div class="relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100"
 						draggable="true">
 						<button
@@ -386,10 +423,10 @@
 							</svg>
 						</button>
 						<span
-							class="flex items-center h-6 px-3 text-xs font-semibold text-green-500 bg-green-100 rounded-full">{{task.priority}}</span>
-						<h4 class="mt-3 text-sm font-medium">
-							<p><strong>Task: </strong> {{task.title}}</p>
-							<p><strong>Description: </strong> {{task.description}}...</p>
+							class="flex items-center h-6 px-3 text-xs font-semibold text-green-500 bg-green-100 rounded-full">priority: {{task.priority}}</span>
+						<h4 class="mt-3 text-sm font-bold">
+							<p>Task:  {{task.title}}</p>
+							<p>Description:  {{task.description}}...</p>
 						</h4>
 						<div class="flex items-center w-full mt-3 text-xs font-medium text-black">
 							<div class="flex items-center">
@@ -399,31 +436,17 @@
 										d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
 										clip-rule="evenodd" />
 								</svg>
-								<span class="ml-1 leading-none">{{task.created_at}}</span>
+								<span class="ml-1 leading-none">
+									
+									<p>Created At: {{task.created_at}}</p>
+									<p>Scheduled At :{{task.scheduled_at}}</p></span>
+									
+									
 							</div>
-							<div class="relative flex items-center ml-4">
-								<svg class="relative w-4 h-4 text-gray-300 fill-current"
-									xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-									<path fill-rule="evenodd"
-										d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-										clip-rule="evenodd" />
-								</svg>
-								<span class="ml-1 leading-none">4</span>
-							</div>
-							<div class="flex items-center ml-4">
-								<svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 20 20" fill="currentColor">
-									<path fill-rule="evenodd"
-										d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-										clip-rule="evenodd" />
-								</svg>
-								<span class="ml-1 leading-none">1</span>
-							</div>
-							<img class="w-6 h-6 ml-auto rounded-full"
-								src='https://randomuser.me/api/portraits/men/64.jpg' />
+							
 						</div>
 					</div>
-
+					</a>
 
 					{% endfor %}
 				</div>
@@ -433,13 +456,7 @@
 					<span class=class="block text-l font-bold" style="color: black;">Completed Tasks</span>
 					<span
 						class="flex items-center justify-center w-5 h-5 ml-2 text-sm font-bold text-indigo bg-white rounded bg-opacity-100">{{completed_tasks|length}}</span>
-					<button
-						class="flex items-center justify-center w-6 h-6 ml-auto text-indigo-500 rounded hover:bg-indigo-500 hover:text-indigo-100">
-						<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-								d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-						</svg>
-					</button>
+					
 				</div>
 				<div class="flex flex-col pb-2 overflow-auto">
 					{% for comp in completed_tasks %}
@@ -454,11 +471,11 @@
 							</svg>
 						</button>
 						<span
-							class="flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full">{{comp.priority}}</span>
-						<h4 class="mt-3 text-sm font-medium">
+							class="flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full">priority: {{comp.priority}}</span>
+						<h4 class="mt-3 text-sm font-bold">
 							<p>Task: {{comp.name}} </p>Description: {{comp.description}} </p>
 						</h4>
-						<div class="flex items-center w-full mt-3 text-xs font-medium text-gray-400">
+						<div class="flex items-center w-full mt-3 text-xs font-medium text-black">
 							<div class="flex items-center">
 								<svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 20 20" fill="currentColor">
@@ -466,28 +483,15 @@
 										d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
 										clip-rule="evenodd" />
 								</svg>
-								<span class="ml-1 leading-none">{{comp.created_at}}</span>
+								<span class="ml-1 leading-none">
+									
+										<p>Created At: {{comp.created_at}}</p>
+										<p>Completed At :{{comp.completed_at}}</p></span>
+									
+									
+								</span>
 							</div>
-							<div class="relative flex items-center ml-4">
-								<svg class="relative w-4 h-4 text-gray-300 fill-current"
-									xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-									<path fill-rule="evenodd"
-										d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-										clip-rule="evenodd" />
-								</svg>
-								<span class="ml-1 leading-none">4</span>
-							</div>
-							<div class="flex items-center ml-4">
-								<svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 20 20" fill="currentColor">
-									<path fill-rule="evenodd"
-										d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-										clip-rule="evenodd" />
-								</svg>
-								<span class="ml-1 leading-none">1</span>
-							</div>
-							<img class="w-6 h-6 ml-auto rounded-full"
-								src='https://randomuser.me/api/portraits/women/26.jpg' />
+							
 						</div>
 					</div>
 
@@ -500,13 +504,118 @@
 					<span class="block text-l font-bold" style="color: black;">Open Issues</span>
 					<span
 						class="flex items-center justify-center w-5 h-5 ml-2 text-sm font-bold text-indigo bg-white rounded bg-opacity-100">{{open_issues|length}}</span>
-					<button
-						class="flex items-center justify-center w-6 h-6 ml-auto text-indigo-500 rounded hover:bg-indigo-500 hover:text-indigo-100">
+						<button data-target="modal-openissue"
+						class="flex items-center justify-center w-6 h-6 ml-auto text-indigo-500 rounded hover:bg-indigo-500 hover:text-indigo-100 modal-trigger">
 						<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 								d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
 						</svg>
 					</button>
+					<div id="modal-openissue" class="modal modal-fixed-footer">
+						<div class="modal-content center">
+							<form class="col s12" action="{% url 'create_issue' %}" method="post">
+								{% csrf_token %}
+								<h4>Add Task</h4>
+								<script>
+									document.addEventListener('DOMContentLoaded', function() {
+										var elems = document.querySelectorAll('select');
+										var instances = M.FormSelect.init(elems);
+									  });
+								</script>
+								<div class="row">
+									
+									<div class="row">
+										
+										<div class="input-field col s6">
+											<i class="material-icons prefix">border_color</i>
+											<input id="icon_telephone" type="text" class="validate" name="name"
+												required>
+											<label for="icon_telephone">Issue Name</label>
+										</div>
+										<div class="input-field col s6">
+											<select name="project" required>
+									
+											  <option value="" disabled selected>Choose Project</option>
+											  {% for project in projects %}
+											  <option value="{{project.id}}">{{project.title}}</option>
+											  
+											  {% endfor %}
+											</select>
+											<label>Select Project</label>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="input-field col s6">
+											<i class="material-icons prefix">book</i>
+											<input id="icon_prefix" type="text" class="validate" name="description" required>
+											<label for="icon_prefix">Issue Description</label>
+										</div>
+										<div class="input-field col s6">
+											<select name="members" required>
+									
+											  <option value="" disabled selected>Assign to</option>
+											  {% for member in all_members %}
+											  <option value="{{member.id}}">{{member.name}}</option>
+											  {% endfor %}
+											</select>
+											<label>Choose Member</label>
+										  </div>
+										
+									</div>
+
+									<!-- <div class="row">
+										<div class="input-field col s6">
+											<i class="material-icons prefix">book</i>
+											<input id="icon_prefix" type="date" class="validate" name="schedule_date"
+												required>
+											<label for="icon_prefix">Schedule to</label>
+										</div>
+										<div class="input-field col s6">
+											<i class="material-icons prefix">book</i>
+											<input id="icon_prefix" type="time" class="validate" name="schedule_time"
+												required>
+				
+										</div>
+										
+									</div> -->
+									<div class="row">
+										<div class="input-field col s6">
+											<select name="priority" required>
+									
+												<option value="" disabled selected>Choose Priority</option>
+												
+												<option value="high">High</option>
+												<option value="medium">Medium</option>
+												<option value="low">Low</option>
+												
+												
+											  </select>
+											  <label>Select Priority</label>
+										</div>
+										
+										
+									</div>
+
+									
+								</div>
+						</div>
+						<div class="modal-footer center">
+							<div class="row center center-align">
+
+								<button class="btn waves-effect waves-light center" id="submit_button" type="submit"
+									name="action" style="border-radius: 15px;" value="{{unique_id}}">Add Issue
+									<i class="material-icons right">check</i>
+								</button>
+								<button class="btn waves-effect waves-light center modal-close" type="button"
+									name="close" style="border-radius: 15px; background-color: red;">Close
+									<i class="material-icons right">cancel</i>
+								</button>
+
+							</div>
+						</div>
+						</form>
+					</div>
 				</div>
 				<div class="flex flex-col pb-2 overflow-auto">
 					{% for issue in open_issues %}
@@ -522,11 +631,14 @@
 						</button>
 						<span
 							class="flex items-center h-6 px-3 text-xs font-semibold text-green-500 bg-green-100 rounded-full">{{issue.priority}}</span>
-						<h4 class="mt-3 text-sm font-medium">
-							<p>Title: {{issue.name}}</p>
-							<p>Description: {{issue.description}}</p>
+						<h4 class="mt-3 text-sm font-bold">
+							
+								<p>Title: {{issue.name}}</p>
+								<p>Description: {{issue.description}}</p>
+							
+							
 						</h4>
-						<div class="flex items-center w-full mt-3 text-xs font-medium text-gray-400">
+						<div class="flex items-center w-full mt-3 text-xs font-medium text-black">
 							<div class="flex items-center">
 								<svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 20 20" fill="currentColor">
@@ -536,26 +648,7 @@
 								</svg>
 								<span class="ml-1 leading-none">{{issue.created_at}}</span>
 							</div>
-							<div class="relative flex items-center ml-4">
-								<svg class="relative w-4 h-4 text-gray-300 fill-current"
-									xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-									<path fill-rule="evenodd"
-										d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-										clip-rule="evenodd" />
-								</svg>
-								<span class="ml-1 leading-none">4</span>
-							</div>
-							<div class="flex items-center ml-4">
-								<svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 20 20" fill="currentColor">
-									<path fill-rule="evenodd"
-										d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-										clip-rule="evenodd" />
-								</svg>
-								<span class="ml-1 leading-none">1</span>
-							</div>
-							<img class="w-6 h-6 ml-auto rounded-full"
-								src='https://randomuser.me/api/portraits/men/64.jpg' />
+	
 						</div>
 					</div>
 
@@ -580,21 +673,17 @@
 					{% for issue in closed_issues %}
 					<div class="relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100"
 						draggable="true">
-						<button
-							class="absolute top-0 right-0 flex items-center justify-center hidden w-5 h-5 mt-3 mr-2 text-gray-500 rounded hover:bg-gray-200 hover:text-gray-700 group-hover:flex">
-							<svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-								fill="currentColor">
-								<path
-									d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-							</svg>
-						</button>
+						
 						<span
 							class="flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full">{{issue.priority}}</span>
-						<h4 class="mt-3 text-sm font-medium">
-							<p>Title: {{issue.name}}</p>
-							<p>Description: {{issue.description}}</p>
+						<h4 class="mt-3 text-sm font-bold">
+							
+								<p>Title: {{issue.name}}</p>
+								<p>Description: {{issue.description}}</p>
+							
+							
 						</h4>
-						<div class="flex items-center w-full mt-3 text-xs font-medium text-gray-400">
+						<div class="flex items-center w-full mt-3 text-xs font-medium text-black">
 							<div class="flex items-center">
 								<svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 20 20" fill="currentColor">
@@ -604,26 +693,7 @@
 								</svg>
 								<span class="ml-1 leading-none">{{issue.completed_at}}</span>
 							</div>
-							<div class="relative flex items-center ml-4">
-								<svg class="relative w-4 h-4 text-gray-300 fill-current"
-									xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-									<path fill-rule="evenodd"
-										d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-										clip-rule="evenodd" />
-								</svg>
-								<span class="ml-1 leading-none">4</span>
-							</div>
-							<div class="flex items-center ml-4">
-								<svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 20 20" fill="currentColor">
-									<path fill-rule="evenodd"
-										d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-										clip-rule="evenodd" />
-								</svg>
-								<span class="ml-1 leading-none">1</span>
-							</div>
-							<img class="w-6 h-6 ml-auto rounded-full"
-								src='https://randomuser.me/api/portraits/women/26.jpg' />
+							
 						</div>
 					</div>
 					{% endfor %}
@@ -634,33 +704,24 @@
 					<span class="block text-l font-bold" style="color: black; font-weight: 20px;">Expired</span>
 					<span
 						class="flex items-center justify-center w-5 h-5 ml-2 text-sm font-bold text-indigo bg-white rounded bg-opacity-100">{{all_expired|length}}</span>
-					<button
-						class="flex items-center justify-center w-6 h-6 ml-auto text-indigo-500 rounded hover:bg-indigo-500 hover:text-indigo-100">
-						<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-								d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-						</svg>
-					</button>
+					
 				</div>
 				<div class="flex flex-col pb-2 overflow-auto">
 					{% for exp in all_expired %}
+					
 					<div class="relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100"
 						draggable="true">
-						<button
-							class="absolute top-0 right-0 flex items-center justify-center hidden w-5 h-5 mt-3 mr-2 text-gray-500 rounded hover:bg-gray-200 hover:text-gray-700 group-hover:flex">
-							<svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-								fill="currentColor">
-								<path
-									d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-							</svg>
-						</button>
+						
 						<span
 							class="flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full">{{exp.priority}}</span>
-						<h4 class="mt-3 text-sm font-medium">
-							<p>Title: {{exp.name}}</p>
-							<p>Description: {{exp.description}}</p>
+						<h4 class="mt-3 text-sm font-bold">
+							
+								<p>Title: {{exp.name}}</p>
+								<p>Description: {{exp.description}}</p>
+							
+							
 						</h4>
-						<div class="flex items-center w-full mt-3 text-xs font-medium text-gray-400">
+						<div class="flex items-center w-full mt-3 text-xs font-medium text-black">
 							<div class="flex items-center">
 								<svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 20 20" fill="currentColor">
@@ -670,26 +731,7 @@
 								</svg>
 								<span class="ml-1 leading-none">{{exp.scheduled_at}}</span>
 							</div>
-							<div class="relative flex items-center ml-4">
-								<svg class="relative w-4 h-4 text-gray-300 fill-current"
-									xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-									<path fill-rule="evenodd"
-										d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-										clip-rule="evenodd" />
-								</svg>
-								<span class="ml-1 leading-none">4</span>
-							</div>
-							<div class="flex items-center ml-4">
-								<svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 20 20" fill="currentColor">
-									<path fill-rule="evenodd"
-										d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-										clip-rule="evenodd" />
-								</svg>
-								<span class="ml-1 leading-none">1</span>
-							</div>
-							<img class="w-6 h-6 ml-auto rounded-full"
-								src='https://randomuser.me/api/portraits/women/26.jpg' />
+							
 						</div>
 					</div>
 					{% endfor %}
